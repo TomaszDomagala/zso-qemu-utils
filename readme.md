@@ -15,6 +15,8 @@ Change /etc/ssh/sshd_config to:
 Then you can use ssh to login to the qemu machine.
 Copy your ssh keys to the qemu machine as root@localost port 2222.
 
-Setup ssh keys: `ssh-copy-id  -p 2222 root@localhost`
+Setup ssh keys: `ssh-copy-id  -p 2222 zso@localhost`
 
-Copy your own ssh keys to the machine to use git and ssh: `scp -P 2222 -r ~/.ssh root@localhost:/root/` 
+Copy your own ssh keys to the machine to use git and ssh: `scp -P 2222 -r ~/.ssh zso@localhost:/root/` 
+
+Open terminal `ssh -p 2222 zso@localhost`
