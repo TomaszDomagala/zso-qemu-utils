@@ -20,3 +20,16 @@ Setup ssh keys: `ssh-copy-id  -p 2222 zso@localhost`
 Copy your own ssh keys to the machine to use git and ssh: `scp -P 2222 -r ~/.ssh zso@localhost:/~` 
 
 Open terminal `ssh -p 2222 zso@localhost`
+
+You can add aliases to ssh config to simplify commands. In ~/.ssh/config:
+```
+Host zso-zso
+  HostName localhost
+  Port 2222
+  User zso
+
+Host root-zso
+  HostName localhost
+  Port 2222
+  User root
+```
