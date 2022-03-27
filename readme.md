@@ -17,6 +17,6 @@ Copy your ssh keys to the qemu machine as root@localost port 2222.
 
 Setup ssh keys: `ssh-copy-id  -p 2222 zso@localhost`
 
-Copy your own ssh keys to the machine to use git and ssh: `scp -P 2222 -r ~/.ssh zso@localhost:/root/` 
+Copy your own ssh keys to the machine to use git and ssh: `scp -P 2222 -r ~/.ssh zso@localhost:/~` 
 
 Open terminal `ssh -p 2222 zso@localhost`
