@@ -16,7 +16,7 @@ zso2022_cow.qcow2: ## Create zso2022 image
 	qemu-img create -f qcow2 -b $< $@ 5G
 
 .PHONY: qemu
-qemu: ## Run qemu
+run: ## Run qemu
 	@echo "Running qemu"
 	qemu-system-x86_64 --enable-kvm -m 15G -device virtio-balloon -smp 8 -cpu qemu64,smap,smep -nographic -device virtio-scsi-pci,id=scsi0 -drive file=zso2022_cow.qcow2,if=none,id=drive0 -device scsi-hd,bus=scsi0.0,drive=drive0 -net nic,model=virtio -net user,hostfwd=tcp::2222-:22
 
