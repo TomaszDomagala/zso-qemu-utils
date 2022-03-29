@@ -13,8 +13,10 @@
 - `reboot` - reboot the machine, reload the partition table
 - `resize2fs /dev/sda3` - resize the partition
 - Change /etc/ssh/sshd_config to: PermitRootLogin yes, PasswordAuthentication yes
-- Setup ssh keys, from host: `ssh-copy-id  -p 2222 zso@localhost`
+- Setup ssh keys for zso, from host: `ssh-copy-id  -p 2222 zso@localhost`
+- Setup ssh keys for root, from host: `ssh-copy-id  -p 2222 root@localhost`
 - Copy your own ssh keys to the machine to use git and ssh: `scp -P 2222 -r ~/.ssh zso@localhost:~`
+- `apt-get update && apt-get install -y rsync`
 - close the virtual machine
 - `make current-image.qcow2` - creates the current image, backed by the backing image
 - `make run-current-image` - runs the current image
