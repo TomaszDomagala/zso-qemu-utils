@@ -1,6 +1,8 @@
 all: help
 
 ROOT_DIR = $(shell pwd)
+QEMU = qemu-system-x86_64
+FLAGS = --enable-kvm -m 15G -device virtio-balloon -smp 8 -cpu qemu64,smap,smep -nographic -device virtio-scsi-pci,id=scsi0 -device scsi-hd,bus=scsi0.0,drive=drive0 -net nic,model=virtio -net user,hostfwd=tcp::2222-:22
 
 backing-image.qcow2.xz:
 	@echo "Downloading backing image..."
@@ -19,13 +21,13 @@ current-image.qcow2: ## Create zso2022 image
 run-backing-image: backing-image.qcow2
 run-backing-image: ## Run backing image
 	@echo "Running $@"
-	qemu-system-x86_64 --enable-kvm -m 15G -device virtio-balloon -smp 8 -cpu qemu64,smap,smep -nographic -device virtio-scsi-pci,id=scsi0 -drive file=backing-image.qcow2,if=none,id=drive0 -device scsi-hd,bus=scsi0.0,drive=drive0 -net nic,model=virtio -net user,hostfwd=tcp::2222-:22
+	$(QEMU) $(FLAGS) -drive file=backing-image.qcow2,if=none,id=drive0 $(ADDFLAGS)
 
 .PHONY: run-current-image
 run-current-image: current-image.qcow2
 run-current-image: ## Run current image
 	@echo "Running $@"
-	qemu-system-x86_64 --enable-kvm -m 15G -device virtio-balloon -smp 8 -cpu qemu64,smap,smep -nographic -device virtio-scsi-pci,id=scsi0 -drive file=current-image.qcow2,if=none,id=drive0 -device scsi-hd,bus=scsi0.0,drive=drive0 -net nic,model=virtio -net user,hostfwd=tcp::2222-:22
+	$(QEMU) $(FLAGS) -drive file=current-image.qcow2,if=none,id=drive0 $(ADDFLAGS)
 
 .PHONY: help
 help:
